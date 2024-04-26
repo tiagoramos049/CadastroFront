@@ -1,35 +1,40 @@
 <div class="container p-5" *ngIf="visibilidadeTabela">
     <div class="border border-light p-4">
-        <div>
-            <button type="button" class="btn btn-sm btn-secondary" (click)="ExibirFormularioCadastro()">
-                Novo Cadastro
-            </button>    
-        </div>
-        
-        <hr/>
-
-        <table class="table table-striped table-houver table-sm" *ngIf="cadastros">
-            <tr class="thead-light">
-                <th>Nome</th>
-                <th>Data Nascimento</th>
-                <th>Valor Renda</th>
-                <th>Cpf</th>
-                <th>Ações</th>
-            </tr>
-
-            <tr *ngFor="let cadastro of cadastros">
-                <td>{{cadastro.nomeCompleto}}</td>
-                <td>{{cadastro.dataNascimento}}</td>
-                <td>{{cadastro.valorRenda}}</td>
-                <td>{{cadastro.cpf}}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="ExibirFormularioAtualizacao(cadastro.cadastroId)">Atualizar</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="ExibirConfirmacaoExclusao(cadastro.cadastroId, cadastro.nomeCompleto, conteudoModal)">Excluir</button>
-                </td>
-            </tr>        
-        </table>
-    </div>        
-</div> 
+      <div>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="ExibirFormularioCadastro()">
+          Novo Cadastro
+        </button>
+      </div>
+  
+      <hr/>
+  
+      <table class="table table-striped table-hover table-sm" *ngIf="cadastros">
+        <thead class="thead-light">
+          <tr>
+            <th>Nome</th>
+            <th>Data Nascimento</th>
+            <th>Valor Renda</th>
+            <th>Cpf</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cadastro of cadastros | paginate: { itemsPerPage: 5, currentPage: page }">
+            <td>{{cadastro.nomeCompleto}}</td>
+            <td>{{cadastro.dataNascimento}}</td>
+            <td>{{cadastro.valorRenda}}</td>
+            <td>{{cadastro.cpf}}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="ExibirFormularioAtualizacao(cadastro.cadastroId)">Atualizar</button>
+              <button type="button" class="btn btn-sm btn-outline-danger" (click)="ExibirConfirmacaoExclusao(cadastro.cadastroId, cadastro.nomeCompleto, conteudoModal)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div> 
 
 <div class="container p-5" *ngIf="visibilidadeFormulario">
     <div class="row">
@@ -42,8 +47,10 @@
                     <input type="text" class="form-control form-control-sm" formControlName="nomeCompleto"/>
                 </div>
                 <div class="form-group">
-                    <label>Data Nascimento</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="dataNascimento"/>    
+                  <label>Data Nascimento</label>
+                  <input type="text" class="form-control form-control-sm"
+                         formControlName="dataNascimento" placeholder="Selecione a Data" bsDatepicker
+                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-default' }">
                 </div>
                 <div class="form-group">
                     <label>Valor Renda</label>

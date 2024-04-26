@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { CadastroComponent } from './components/cadastro/cadastro.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // Importe NgxPaginationModule
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'; // Importe BrowserAnimationsModule
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
+    NgxPaginationModule, // Adicione NgxPaginationModule aos imports
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+    NoopAnimationsModule,
     ModalModule.forRoot() //para a aplicação inteira
   ],
   providers: [HttpClientModule,CadastroService],

@@ -4,6 +4,7 @@ import { Cadastro } from '../../Cadastro';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -18,6 +19,8 @@ export class CadastroComponent implements OnInit {
   formulario : any;
   tituloFormulario: string | undefined;
   cadastros : Cadastro[] | undefined;
+
+  page = 1;
 
   nomeCadastro : string = "";
   cadastroId: number = 0;
